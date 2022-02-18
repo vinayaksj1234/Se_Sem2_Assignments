@@ -1,5 +1,6 @@
 # Se_Sem2_Assignments
 This is Repository of My Se Sem2 Assignments
+<p>&nbsp;</p>
 
 ## DSAL Assignments
 <p>&nbsp;</p>
@@ -77,3 +78,94 @@ Use sequential file to main the data.
 
 #### Assignment 12
 Implementation of a direct access file -Insertion and deletion of a record from a direct access file
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+## MPL Assignments
+<p>&nbsp;</p>
+
+#### Assignment 1
+Write an X86/64 ALP to accept five 64 bit Hexadecimal numbers from user and store them in an array and display the accepted numbers.
+
+<p>&nbsp;</p>
+
+#### Assignment 2 
+Write an X86/64 ALP to accept a string and to display its length.
+
+<p>&nbsp;</p>
+
+#### Assignment 3 
+Write an X86/64 ALP to find the largest of given Byte/Word/Dword/64-bit numbers.
+
+<p>&nbsp;</p>
+
+#### Assignment 4
+Write a switch case driven X86/64 ALP to perform 64-bit hexadecimal arithmetic operations (+,-,*, /) using suitable macros. Define procedure for each operation.
+
+<p>&nbsp;</p>
+
+#### Assignment 5 
+Write an X86/64 ALP to count number of positive and negative numbers from the array.
+
+<p>&nbsp;</p>
+
+#### Assignment 6
+Write X86/64 ALP to convert 4-digit Hex number into its equivalent BCD number and 5-digit BCD number into its equivalent HEX number. Make your program user friendly to 
+accept the choice from user for: (a) HEX to BCD b) BCD to HEX (c) EXIT. 
+Display proper strings to prompt the user while accepting the input and displaying the result. (Wherever necessary, use 64-bit registers).
+
+<p>&nbsp;</p>
+
+#### Assignment 7
+Write X86/64 ALP to detect protected mode and display the values of GDTR, LDTR, IDTR, 
+TR and MSW Registers also identify CPU type using CPUID instruction.
+
+<p>&nbsp;</p>
+
+#### Assignment 8
+Write X86/64 ALP to perform non-overlapped block transfer without string specific instructions. Block containing data can be defined in the data segment.
+
+<p>&nbsp;</p>
+
+#### Assignment 9
+Write X86/64 ALP to perform overlapped block transfer with string specific instructions Block containing data can be defined in the data segment.
+
+<p>&nbsp;</p>
+
+#### Assignment 10 
+Write X86/64 ALP to perform multiplication of two 8-bit hexadecimal numbers. Use 
+successive addition and add and shift method. (use of 64-bit registers is expected).
+
+<p>&nbsp;</p>
+
+#### Assignment 11
+Write X86 Assembly Language Program (ALP) to implement following OS commands 
+i) COPY, ii) TYPE 
+Using file operations. User is supposed to provide command line arguments 
+
+<p>&nbsp;</p>
+
+#### Assignment 12
+Write X86 ALP to find, a) Number of Blank spaces b) Number of lines c) Occurrence of a particular character. Accept the data from the text file. The text file has
+to be accessed during Program_1 execution and write FAR PROCEDURES in Program_2 for the rest of the processing. Use of PUBLIC and EXTERN directives is mandatory.
+
+<p>&nbsp;</p>
+
+#### Assignment 13 
+Write x86 ALP to find the factorial of a given integer number on a command line by using recursion. Explicit stack manipulation is expected in the code.
+
+<p>&nbsp;</p>
+
+#### Assignment 14
+Write an X86/64 ALP password program that operates as follows:
+a. Do not display what is actually typed instead display asterisk (“*”).
+If the password is correct display, “access is granted” else display “Access not Granted”
+
+<p>&nbsp;</p>
+
+#### Assignment 15 
+Study Assignment:
+Motherboards are complex. Break them down, component by component, and Understand how they work. Choosing a motherboard is a hugely important part of 
+building a PC. Study- Block diagram, Processor Socket, Expansion Slots, SATA, RAM, Form Factor, BIOS, Internal Connectors, External Ports, Peripherals and Data Transfer, Display, Audio, Networking, Overclocking, and Cooling. 4. 
+https://www.intel.in/content/www/in/en/support/articles/000006014/boards-and-kits/desktop-boards.html
