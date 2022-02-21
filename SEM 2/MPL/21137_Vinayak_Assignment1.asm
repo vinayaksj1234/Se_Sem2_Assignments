@@ -1,4 +1,4 @@
-:Name: Vinayak Jamadar
+;Name: Vinayak Jamadar
 ;Roll No: 21137
 ;Batch: F1
 ;Class: SE1
@@ -13,7 +13,7 @@ section .data
 	len: equ $-str
 	
 	;Declaration and Defination of String str1
-	str1: db "Numbers are : ", 0xA
+	str1: db "5 Names are as follows : ", 0xA
 	
 	;This will calculate the length of String str1 in len1
 	len1: equ $-str1
