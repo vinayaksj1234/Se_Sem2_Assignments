@@ -4,9 +4,10 @@ keywords, updating values of any entry. Provide facility to display whole data s
 Ascending / Descending order. Also find how many maximum comparisons may require for finding any keyword.
 Use Binary Search Tree for implementation. */
 
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
+// class Node
 class Node{
     Node* left;
     Node* right;
@@ -46,15 +47,17 @@ class Dictionary{
             Node* new_node = new Node();
             new_node->keyword = k;
             cout<<"Enter Meaning : ";
-            cin>>new_node->meaning;
-            cout<<"Keyword \""<<new_node->keyword<<"\" with Meaning \""<<new_node->meaning<<"\" is add in Dictionary"<<endl;
+            string meaning;
+            cin.ignore();
+            getline(cin, new_node->meaning);
             return new_node;
         }
 
-        // This will add new keyword in dictionary
-        void add_keyword(string k){
+        // Adding new keyword in Dictionary
+        bool add_keyword(string k){
             if(root == NULL){
                 root = create_keyword(k);
+                return true;
             }
             else{
                 Node *current = root;
@@ -66,7 +69,7 @@ class Dictionary{
                         if(current->keyword > k){
                             if(current->left == NULL){
                                 current->left = create_keyword(k);
-                                return ;
+                                return true;
                             }
                             current = current->left;
                         }
@@ -74,22 +77,20 @@ class Dictionary{
                         else{
                             if(current->right == NULL){
                                 current->right = create_keyword(k);
-                                return ;
+                                return true;
                             }
                             current = current->right;
                         }
                     }
                     // Keyword already Present in Dictionary
-                    else{
-                        cout<<"Keyword \""<<k<<"\" with meaning \""<<current->meaning<<"\" is Already Present in Dictionary. Enter Different Keyword."<<endl;
-                        return ;
-                    }
+                    else return false;
                 }
             }
         }
 
+        // This will add new keyword in dictionary
         // This will update meaning of keyword
-        void update_meaning(string k){
+        bool update_meaning(string k){
             Node* current = root;
             while (current != NULL)
             {
@@ -99,10 +100,10 @@ class Dictionary{
                     cout<<"Keyword \""<<k<<"\" with Meaning \""<<current->meaning<<"\" is Present in Dictionary."<<endl;
 
                     cout<<"Enter Updating Meaning of Keyword \""<<k<<" : ";
-                    cin>>current->meaning;
+                    cin.ignore();
+                    getline(cin, current->meaning);
 
-                    cout<<"Meaning of Keyword \""<<k<<"\" is Updated Successfully."<<endl;
-                    return ;
+                    return true;
                 }
 
                 // Keyword is not yet Searched in Dictionary
@@ -118,11 +119,19 @@ class Dictionary{
             }
 
             // Required Keyword is not Present in Dictionary
-            cout<<"Keyword : \""<<k<<"\" is Not Present in Dictionary."<<endl;
+            return false;
+        }
+
+        Node* findMinimum(Node* current)
+        {
+            while(current->left != NULL) {
+                current = current->left;
+            }
+            return current;
         }
 
         // This will delete keyword from dictionary
-        void delete_keyword(string k){
+        bool delete_keyword(string k){
             Node *current = root, *parent = root, *next = root;
             while (current != NULL)
             {
@@ -142,46 +151,17 @@ class Dictionary{
 
                     // VIMP NOTE
                     // This means deleting node is non leaf node having both left and right node
-                    // For this we are traversing in left sub tree of current node to replace current node with highest value of left sub tree of current
+                    // For this we are traversing in right sub tree of deleting node to replace deleting node with lowest value of right sub tree of current
                     else if(current->left != NULL && current->right != NULL){
-                        next = current->left;
-                        Node* next_parent = new Node();
-                        next_parent = current;
-                        while (1)
-                        {
-                            // This we traverse till highest value is searched in left sub tree of current
-                            if(next->right != NULL){
-                                next_parent = next;
-                                next = next->right;
-                            }
-                            else{
+                        Node* successor  = findMinimum(current->right);
 
-                                // VIMP NOTE
-                                // This is if highest value of left sub tree of current have a left child
-                                // Then we will point next_left_child to right child of next_parent
-                                if(next->left != NULL){
-                                    Node* next_left_child = new Node();
-                                    next_left_child = next->left;
-                                    next_parent->right = next_left_child;
-                                }
+                        string keyword = successor->keyword;
+                        string meaning = successor->meaning;
 
-                                // Pointing left and right child of current to next
-                                next->left = current->left;
-                                next->right = current->right;
+                        delete_keyword(successor->keyword);
 
-                                // Pointing next to parents left or right child
-                                if(parent->left == current){
-                                    parent->left = next;
-                                }
-                                else{
-                                    parent->right = next;
-                                }
-
-                                // Deleting current and Break the Infinite while loop
-                                delete current;
-                                break;
-                            }
-                        }
+                        current->keyword = keyword;
+                        current->meaning = meaning;
                     }
 
                     //This means deleting node is non leaf node having either left or right node but not both
@@ -206,8 +186,7 @@ class Dictionary{
                         delete current;
                     }
 
-                    cout<<"Keyword \""<<k<<"\" is Deleted form Dictionary."<<endl;
-                    return ;
+                    return true;
                 }
 
                 // Keyword is not yet Searched in Dictionary
@@ -224,13 +203,13 @@ class Dictionary{
             }
 
             // Required Keyword is not Present in Dictionary
-            cout<<"Keyword \""<<k<<"\" is Not Present in Dictionary."<<endl;
+            return false;
         }
 
         // This will read keyword from dictionary
         // If keyword is present in dictionary --> return number of comparisons required to find or read keyword
         // Else --> return 0
-        void search_keyword(string k){
+        int search_keyword(string k){
             Node* current = root;
 
             // This variable will calculate number of comparison required to Search the keyword in Dictionary
@@ -240,9 +219,7 @@ class Dictionary{
                 comparison++;
                 // Keyword is Searched in Dictionary
                 if(current->keyword == k){
-                    cout<<"Keyword \""<<k<<"\" with Meaning \""<<current->meaning<<"\" is Present in Dictionary."<<endl;
-                    cout<<comparison<<" Comparison are required to Find keyword \""<<k<<"\" from Dictionary."<<endl;
-                    return ;
+                    return comparison;
                 }
 
                 // Keyword is not yet Searched in Dictionary
@@ -258,7 +235,7 @@ class Dictionary{
             }
 
             // Required Keyword is not Present in Dictionary
-            cout<<"Keyword \""<<k<<"\" is Not Present in Dictionary."<<endl;
+            return 0;
         }
 
         // This will display keywords in ascending order of keywords
@@ -325,10 +302,28 @@ int main(){
                 keyword[i] = tolower(keyword[i]);
             }
 
-            if(choice == 1) D.add_keyword(keyword);
-            else if(choice == 2) D.search_keyword(keyword);
-            else if(choice == 3) D.update_meaning(keyword);
-            else D.delete_keyword(keyword);
+            if(choice == 1){
+                if(D.add_keyword(keyword)) cout<<"Keyword \""<<keyword<<"\" is Added inside Dictionary."<<endl;
+                else cout<<"Keyword \""<<keyword<<"\" is Not Present in Dictionary."<<endl;
+            }
+
+            else if(choice == 2){
+                if(D.search_keyword(keyword)) {
+                    cout<<"Keyword \""<<keyword<<"\" is Present in Dictionary."<<endl;
+                    cout<<D.search_keyword(keyword)<<" Comparison are required to Find keyword \""<<keyword<<"\" from Dictionary."<<endl;
+                }
+                else cout<<"Keyword \""<<keyword<<"\" is Not Present in Dictionary."<<endl;
+            }
+
+            else if(choice == 3){
+                if(D.update_meaning(keyword)) cout<<"Meaning of Keyword \""<<keyword<<"\" is Updated Successfully."<<endl;
+                else cout<<"Keyword \""<<keyword<<"\" is Not Present in Dictionary."<<endl;
+            }
+
+            else{
+                if(D.delete_keyword(keyword)) cout<<"Keyword \""<<keyword<<"\" is Deleted form Dictionary."<<endl;
+                else cout<<"Keyword \""<<keyword<<"\" is Not Present in Dictionary."<<endl;
+            }
         }
         else if(choice == 5){
             cout<<"\nKeywords and their meaning in Ascending Order : "<<endl;
