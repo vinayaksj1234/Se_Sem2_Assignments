@@ -8,38 +8,49 @@
 #include <string.h>
 using namespace std;
 
-#define size 3
+// typedef of long long int as lli
+typedef long int li;
 
+// defining macro size as 10
+#define size 100
+
+// class HashEntry
 class HashEntry{
-	long int telephone_no;
+	li telephone_no;
 	string name;
 
 public:
+	// Default Constructor
 	HashEntry(){
 		telephone_no = 0;
 		name = "";
 	}
-
-	HashEntry(long int t_no, string n){
+	// Parameterized Constructor
+	HashEntry(li t_no, string n){
 		telephone_no = t_no;
 		name = n;
 	}
 
+	// Copy Constructor
 	HashEntry(HashEntry &obj){
 		telephone_no = obj.telephone_no;
 		name = obj.name;
 	}
-
+	// Making HashTable class as friend class of HashEntry
+	// So that HashTable class can access the private data members
+	// and member functions of class HashEntry.
 	friend class HashTable;
 };
 
+// class HashTable
 class HashTable{
 
 	HashEntry H[size];
 
 public:
-	// This is insertion of HashEntry or Linear Probing without replacement
-	int HashFunc(long int t){
+
+	// Hash Function
+	int HashFunc(li t){
 		int sum = 0;
 		while(t){
 			sum += (t%10);
@@ -50,7 +61,7 @@ public:
 	}
 
 	// Insert using linear probing without replacement
-	void insert_wor(long int key, string value){
+	void insert_wor(li key, string value){
 		int hash_index = HashFunc(key), count = 0;
 		HashEntry entry;
 		entry.telephone_no = key;
@@ -67,7 +78,7 @@ public:
 	}
 
 	// Insert using linear probing with replacement
-	void insert_wr(long int key, string value){
+	void insert_wr(li key, string value){
 		int hash_index = HashFunc(key), count = 0;
 		HashEntry entry;
 		entry.telephone_no = key;
@@ -100,6 +111,7 @@ public:
 		display();
 	}
 
+	// Display all Entries of HashTable
 	void display(){
 		cout<<"\n***Entries***\n"<<endl;
         for (int i = 0; i < size; i++)
@@ -113,7 +125,8 @@ public:
 		cout<<"*************"<<endl;
 	}
 
-	void search(long int key){
+	// Search Entry in HashTable
+	void search(li key){
 		int hash_index = HashFunc(key), original_hash_index = hash_index, count = 1;
 		while(H[hash_index].telephone_no != key){
 			hash_index = (hash_index+1)%size;
@@ -138,10 +151,10 @@ int main() {
 
 	int entries = 0;
 
-	long int telephone_no;
+	li telephone_no;
 	string name;
 
-	// Menu for Operations of Dictionary
+	// Menu for Operations of Telephone Database
 	while (1)
 	{
 		cout<<"\n1. Create Entry."<<endl;
@@ -154,6 +167,7 @@ int main() {
 		cin>>choice;
 
 		if(choice == 1){
+			// Exception Handling if Total Entries become greater than size of HashTable
 			entries++;
 			if(entries > size){
 				cout<<"You can only Create "<<size<<" Entries."<<endl;
@@ -164,8 +178,11 @@ int main() {
 			cout<<"Enter Name : ";
 			cin>>name;
 
+			// Insertion of Entry in HashTable with linear probing without Replacement
 			cout<<"\nLinear probing Without Replacement\n"<<endl;
 			HT_wor.insert_wor(telephone_no, name);
+
+			// Insertion of Entry in HashTable with linear probing with Replacement
 			cout<<"\nLinear probing With Replacement\n"<<endl;
 			HT_wr.insert_wr(telephone_no, name);
 		}
@@ -177,8 +194,11 @@ int main() {
 			cout<<"Enter Telephone Number to be Searched : ";
 			cin>>telephone_no;
 
+			// Search of Entry in HashTable with linear probing without Replacement	
 			cout<<"\nLinear probing Without Replacement\n"<<endl;
 			HT_wor.search(telephone_no);
+
+			// Search of Entry in HashTable with linear probing with Replacement				
 			cout<<"\nLinear probing With Replacement\n"<<endl;
 			HT_wr.search(telephone_no);
 		}
