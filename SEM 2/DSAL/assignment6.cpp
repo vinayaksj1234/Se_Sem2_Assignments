@@ -6,6 +6,8 @@
 */
 
 #include <iostream>
+#include <queue>
+#include <stack>
 using namespace std;
 
 int choice;
@@ -19,7 +21,7 @@ class Node{
 public:
 	Node();
 	Node(int);
-
+	Node(const Node&);
 	friend class Graph;
 };
 
@@ -37,14 +39,23 @@ Node::Node(int d){
 	next = NULL;
 }
 
+// Copy Constructor
+Node::Node(const Node &obj){
+	data = obj.data;
+	down = obj.down;
+	next = obj.next;
+}
+
 // class Graph
 class Graph{
-	Node* Head;
+	Node *Head;
 public:
 	Graph();
 	void insert_vertex();
 	void insert_edge();
 	void display_list();
+	void bfs();
+	void dfs();
 };
 
 // Default Constructor
@@ -175,7 +186,7 @@ void Graph::insert_edge(){
                                 previous = current;
                                 current = current->next;
                             }
-                            if(already_present) cout<<"This Edge is already Exist. Enter another Destination Vertex."<<endl; 
+                            if(already_present) cout<<"This Edge is already Exist. Enter another Destination Vertex."<<endl;
                             else previous->next = new Node(destination), cout<<"Edge Inserted Successfully."<<endl;
                         }
                         else cout<<"Destination Vertex "<<destination<<" Not Found in Graph."<<endl;
@@ -222,10 +233,218 @@ void Graph::display_list(){
 	}
 }
 
+void Graph::bfs(){
+	int start;
+	cout<<"Enter the start point for BFS Traversal : ";
+	cin>>start;
+
+	// Checking whether start vertex is present in graph or not
+	Node *Visited, *current = Head, *previous = current;
+	bool flag = 0;
+	while(current != NULL){
+		if(current->data == start){
+			flag = 1;
+			break;
+		}
+		current = current->down;
+	}
+
+	// If start vertex is present in graph
+	if(flag){
+		// Insert start vertex in Visited Linked List
+		Visited = new Node(start);
+
+		// Creating a queue for BFS
+		queue <Node*> Q;
+
+		// Insert the start vertex in visited linked list and enqueue in queue
+		Q.push(current);
+
+		cout<<"BFS traversal is : [ ";
+		while(!Q.empty()) {
+			// Dequeue a vertex from queue and print it
+			Node* display = Q.front();
+			cout<<display->data<<" ";
+			Q.pop();
+
+			// Get all adjacent vertices of the dequeued vertex display. 
+			// If a adjacent vertex has not been visited, 
+			// then insert vertex inside the visited linked list and enqueue it
+			display = display->next;
+			while(display != NULL){
+				current = Visited, previous = Visited;
+				flag = 0;
+				while(current != NULL){
+					if(current->data == display->data){
+						flag = 1;
+						break;
+					}
+					previous = current;
+					current = current->next;
+				}
+				if(!flag){
+					current = Head;
+					while(current != NULL){
+						if(current->data == display->data){
+							break;
+						}
+						current = current->down;
+					}
+					Node* newnode = current;
+					previous->next = new Node(display->data);
+					Q.push(newnode);
+				}
+				display = display->next;
+			}
+		}
+		cout<<"]"<<endl;
+	}
+	// If start vertex not present in graph
+	else cout<<"Start Vertex "<<start<<" Not Found in Graph."<<endl;
+}
+
+void Graph::dfs(){
+	int start;
+	cout<<"Enter the start point for DFS Traversal : ";
+	cin>>start;
+
+	// Checking whether start vertex is present in graph or not
+	Node *Visited = NULL, *current = Head, *previous = current;
+	bool flag = 0;
+	while(current != NULL){
+		if(current->data == start){
+			flag = 1;
+			break;
+		}
+		current = current->down;
+	}
+
+	// If start vertex is present in graph
+	if(flag){
+		// Insert start vertex in Visited Linked List
+		Visited = new Node(current->data);
+
+		// Create a stack for DFS
+		stack <Node*> S;
+
+		// Insert the start vertex in visited linked list and push in stack
+		S.push(current);
+
+		cout<<"DFS traversal is : [ "<<current->data<<" ";
+		while(!S.empty()) {
+			// Pop a vertex from stack and print it
+			Node* display = S.top();
+			S.pop();
+
+			// Stack may contain same vertex twice. 
+			// So we need to print the popped item only
+			// if it is not visited.
+			current = Visited, previous = Visited;
+			flag = 0;
+			while(current != NULL){
+				if(current->data == display->data){
+					flag = 1;
+					break;
+				}
+				previous = current;
+				current = current->next;
+			}
+			if(!flag){
+				cout<<display->data<<" ";
+				previous->next = new Node(display->data);
+			}
+
+			// Get all adjacent vertices of the popped vertex display
+			// If a adjacent vertex has not been visited, then push it to the stack.
+			display = display->next;
+			while(display != NULL){
+				current = Visited;
+				flag = 0;
+				while(current != NULL){
+					if(current->data == display->data){
+						flag = 1;
+						break;
+					}
+					current = current->next;
+				}
+				if(!flag){
+					current = Head;
+					while(current != NULL){
+						if(current->data == display->data){
+							break;
+						}
+						current = current->down;
+					}
+					Node* newnode = current;
+					S.push(newnode);
+				}
+				display = display->next;
+			}
+		}
+		cout<<"]"<<endl;
+	}
+	// If start vertex not present in graph
+	else cout<<"Start Vertex "<<start<<" Not Found in Graph."<<endl;
+}
+
 int main() {
+
+	// Creating Instance of Graph class
 	Graph G;
-	G.insert_vertex();
-    G.insert_edge();
-	G.display_list();
+
+	// Menu for Standard Operations on Dictionary
+	while (1)
+	{
+		cout << "\n1. Insert Vertices." << endl;
+		cout << "2. Insert Edges." << endl;
+		cout << "3. Display List." << endl;
+		cout << "4. BFS Traversal." << endl;
+		cout << "5. DFS Traversal." << endl;
+		cout << "6. Exit." << endl;
+
+		int choice;
+		// Reading choice from user
+		cout << "Enter your choice from Above Menu : ";
+		cin >> choice;
+		cout << endl;
+
+		// Insertion of Vertices in Graph
+		if (choice == 1)
+		{
+			G.insert_vertex();
+		}
+		// Insertion of Edges in Graph
+		else if (choice == 2)
+		{
+			G.insert_edge();
+		}
+		// Displaying Adjacency list
+		else if (choice == 3)
+		{
+			G.display_list();
+		}
+		// BFS Traversal
+		else if (choice == 4)
+		{
+			G.bfs();
+		}
+		// DFS Traversal
+		else if (choice == 5)
+		{
+			G.dfs();
+		}
+		// Program Exit
+		else if (choice == 6)
+		{
+			cout << "Program Exit." << endl;
+			break;
+		}
+		// Invalid Choice
+		else
+		{
+			cout << "Enter a valid choice." << endl;
+		}
+	}
+
 	return 0;
 }
