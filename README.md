@@ -47,15 +47,18 @@ and perform DFS and BFS on that.
 You have a business with several offices; you want to lease phone lines to connect them up with each other; and the phone company charges different amounts of money to connect 
 different pairs of cities. You want a set of lines that connects all your offices with a minimum total cost. Solve the problem by suggesting appropriate data structures.
 
+#### Assignment 8
+Write a C++/Java program to implement topological sorting on graph using object oriented programming features Design necessary class. .( Use of graph)
+
 <p>&nbsp;</p>
 
 ### Group D
 
-#### Assignment 8
+#### Assignment 9
 Given sequence k = k1 <k2 < … <kn of n sorted keys, with a search probability pi for each key ki . Build the Binary search tree that has the least search cost given the access 
 probability for each key.
 
-#### Assignment 9
+#### Assignment 10
 A Dictionary stores keywords and its meanings. Provide facility for adding new keywords, deleting keywords, updating values of any entry. Provide facility to display whole 
 data sorted in ascending/ Descending order. Also find how many maximum comparisons may require for finding any keyword. Use Height balance tree and find the complexity for 
 finding a keyword.
@@ -64,19 +67,19 @@ finding a keyword.
 
 ### Group E
 
-#### Assignment 10
+#### Assignment 11
 Implement the Heap sort algorithm implemented in Java demonstrating heap data structure with modularity of programming language.
 
 <p>&nbsp;</p>
 
 ### Group F
 
-#### Assignment 11
+#### Assignment 12
 Department maintains a student information. The file contains roll number, name, division and address. Allow user to add, delete information of student. 
 Display information of particular employee. If record of student does not exist an appropriate message is displayed. If it is, then the system displays the student details. 
 Use sequential file to main the data.
 
-#### Assignment 12
+#### Assignment 13
 Implementation of a direct access file -Insertion and deletion of a record from a direct access file
 
 <p>&nbsp;</p>
@@ -111,61 +114,15 @@ Write an X86/64 ALP to count number of positive and negative numbers from the ar
 <p>&nbsp;</p>
 
 #### Assignment 6
-Write X86/64 ALP to convert 4-digit Hex number into its equivalent BCD number and 5-digit BCD number into its equivalent HEX number. Make your program user friendly to 
-accept the choice from user for: (a) HEX to BCD b) BCD to HEX (c) EXIT. 
-Display proper strings to prompt the user while accepting the input and displaying the result. (Wherever necessary, use 64-bit registers).
-
-<p>&nbsp;</p>
-
-#### Assignment 7
 Write X86/64 ALP to detect protected mode and display the values of GDTR, LDTR, IDTR, 
 TR and MSW Registers also identify CPU type using CPUID instruction.
 
 <p>&nbsp;</p>
 
-#### Assignment 8
+#### Assignment 7
 Write X86/64 ALP to perform non-overlapped block transfer without string specific instructions. Block containing data can be defined in the data segment.
 
 <p>&nbsp;</p>
 
-#### Assignment 9
-Write X86/64 ALP to perform overlapped block transfer with string specific instructions Block containing data can be defined in the data segment.
-
-<p>&nbsp;</p>
-
-#### Assignment 10 
-Write X86/64 ALP to perform multiplication of two 8-bit hexadecimal numbers. Use 
-successive addition and add and shift method. (use of 64-bit registers is expected).
-
-<p>&nbsp;</p>
-
-#### Assignment 11
-Write X86 Assembly Language Program (ALP) to implement following OS commands 
-i) COPY, ii) TYPE 
-Using file operations. User is supposed to provide command line arguments 
-
-<p>&nbsp;</p>
-
-#### Assignment 12
-Write X86 ALP to find, a) Number of Blank spaces b) Number of lines c) Occurrence of a particular character. Accept the data from the text file. The text file has
-to be accessed during Program_1 execution and write FAR PROCEDURES in Program_2 for the rest of the processing. Use of PUBLIC and EXTERN directives is mandatory.
-
-<p>&nbsp;</p>
-
-#### Assignment 13 
+#### Assignment 8
 Write x86 ALP to find the factorial of a given integer number on a command line by using recursion. Explicit stack manipulation is expected in the code.
-
-<p>&nbsp;</p>
-
-#### Assignment 14
-Write an X86/64 ALP password program that operates as follows:
-a. Do not display what is actually typed instead display asterisk (“*”).
-If the password is correct display, “access is granted” else display “Access not Granted”
-
-<p>&nbsp;</p>
-
-#### Assignment 15 
-Study Assignment:
-Motherboards are complex. Break them down, component by component, and Understand how they work. Choosing a motherboard is a hugely important part of 
-building a PC. Study- Block diagram, Processor Socket, Expansion Slots, SATA, RAM, Form Factor, BIOS, Internal Connectors, External Ports, Peripherals and Data Transfer, Display, Audio, Networking, Overclocking, and Cooling. 4. 
-https://www.intel.in/content/www/in/en/support/articles/000006014/boards-and-kits/desktop-boards.html
