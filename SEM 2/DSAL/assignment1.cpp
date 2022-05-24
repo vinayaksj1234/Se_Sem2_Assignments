@@ -106,6 +106,8 @@ class Binary_Tree{
 
         Binary_Tree(){
             root = NULL;
+            leaf = 0;
+            internal = 0;
         }
 
         void create(Node_for_Tree* current = NULL){  // Creating Tree
@@ -343,11 +345,9 @@ class Binary_Tree{
             display(copy); // Displaying copied tree
         }
 
-        void nodes_calculation(Node_for_Tree* current, int l = 0, int i = 0){  // This will Calculate the Leaf and Internal Nodes of Tree
-            leaf = l;
-            internal = i;
+        void nodes_calculation(Node_for_Tree* current){  // This will Calculate the Leaf and Internal Nodes of Tree
             if(current != NULL){
-                nodes_calculation(current->left, leaf, internal);
+                nodes_calculation(current->left);
                 if(current->left == NULL && current->right == NULL){
                     // if current left and right element are NULL then it is Leaf Node
                     leaf++;
@@ -356,7 +356,7 @@ class Binary_Tree{
                     // Else it is Internal Node
                     internal++;
                 }
-                nodes_calculation(current->right, leaf, internal);
+                nodes_calculation(current->right);
             }
         }
 
@@ -383,6 +383,8 @@ class Binary_Tree{
 
         void set_root(){  // This will set the root to NULL
             root = NULL;
+            leaf = 0;
+            internal = 0;
         }
 };
 
