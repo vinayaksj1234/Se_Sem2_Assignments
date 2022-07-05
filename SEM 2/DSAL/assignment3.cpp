@@ -127,9 +127,7 @@ public:
 
 			while (current->rbit == 0){
 				current = current->right;
-				if (current == head){
-					return;
-				}
+				if (current == head) return;
 				cout << current->data << " ";
 			}
 			current = current->right;
@@ -149,8 +147,7 @@ public:
 
 			while (current->rbit == 0){
 				current = current->right;
-				if (current == head)
-					return;
+				if (current == head) return;
 			}
 			current = current->right;
 

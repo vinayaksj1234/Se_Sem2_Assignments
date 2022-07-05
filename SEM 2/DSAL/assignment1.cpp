@@ -326,13 +326,12 @@ class Binary_Tree{
         }
 
         int height_of_tree(Node_for_Tree *current){  // Calculating Height of Tree
-            int LeftHeight = 0, RightHeight = 0;
             if(current == NULL){
                 return 0;
             }
             else{
-                LeftHeight = height_of_tree(current->left);
-                RightHeight = height_of_tree(current->right);
+                int LeftHeight = height_of_tree(current->left);
+                int RightHeight = height_of_tree(current->right);
                 return max(LeftHeight, RightHeight) + 1;
             }
         }

@@ -1,121 +1,124 @@
-// Problem Statement :
-// Implement the Heap sort algorithm implemented in C++/Java demonstrating
-// heap data structure with modularity of programming language.
-
 #include <bits/stdc++.h>
-#include <math.h>
-
 using namespace std;
 
-class MinHeap
+class Heap
 {
-    int *harr;     // pointer to array of elements in heap
-    int capacity;  // maximum possible size of min heap
-    int heap_size; // Current number of elements in min heap
-public:
-    MinHeap(int cap)
-    {
-        heap_size = cap;
-        capacity = cap;
-        harr = new int[cap];
-    }
+    int *heap, *arr;
+    int size;
 
-    void printArray()
+public:
+    Heap()
     {
-    	cout<< "[ ";
-        for (int i = 0; i < heap_size; i++)
-            cout << harr[i] << " ";
+        size = 0;
+        heap = new int(size);
+        arr = new int(size);
+    }
+    void create()
+    {
+        cout << "Enter size of Heap : ";
+        cin >> size;
+        heap = new int(size);
+        arr = new int(size);
+
+        for (int i = 0; i < size; i++)
+        {
+            cout << "Enter " << i + 1 << " element of heap : ";
+            cin >> heap[i];
+        }
+    }
+    void insert()
+    {
+        size++;
+        cout << "Enter " << size << " element of heap : ";
+        cin >> heap[size - 1];
+    }
+    void display_unsorted()
+    {
+        cout << "[ ";
+        for (int i = 0; i < size; i++)
+        {
+            cout << heap[i] << " ";
+        }
         cout << "]" << endl;
     }
-
-    int parent(int i)
+    void display_sorted()
     {
-        return (i - 1) / 2;
-    }
-
-    int left(int i)
-    {
-        return (2 * i + 1);
-    }
-
-    int right(int i)
-    {
-        return (2 * i + 2);
-    }
-    int getMin()
-    {
-        return harr[0];
-    }
-    void MinHeapify(int i)
-    {
-        int l = left(i);
-        int r = right(i);
-        int smallest = i;
-        if (l < heap_size && harr[l] < harr[i])
-            smallest = l;
-        if (r < heap_size && harr[r] < harr[smallest])
-            smallest = r;
-        if (smallest != i)
-        {
-            swap(harr[i], harr[smallest]);
-            MinHeapify(smallest);
-        }
-    }
-    // Method to remove minimum element (or root) from min heap
-    int extractMin()
-    {
-        if (heap_size <= 0)
-            return 999999;
-        if (heap_size == 1)
-        {
-            heap_size--;
-            return harr[0];
-        }
-
-        // Store the minimum value, and remove it from heap
-        int root = harr[0];
-        harr[0] = harr[heap_size - 1];
-        heap_size--;
-        MinHeapify(0);
-        return root;
-    }
-
-    void getUnsortedArray()
-    {
-        cout << "Enter " << capacity << " no of elements to sort using HEAPSORT" << endl;
-        for (int i = 0; i < capacity; i++)
-            cin >> harr[i];
-    }
-
-    void heapSort()
-    {
-        int temp[capacity];
         cout << "[ ";
-        for (int j = 0; j < capacity; j++)
+        for (int i = 0; i < size; i++)
         {
-            temp[j] = extractMin();
-            cout << temp[j] << " ";
+            cout << arr[i] << " ";
         }
-        cout<<"]"<<endl;
+        cout << "]" << endl;
+    }
+    void sort()
+    {
+        int run = size, swap;
+        for (int i = 0; i < size; i++)
+        {
+            arr[i] = heap[i];
+        }
+
+        while (run)
+        {
+            // max heapify
+            for (int i = 0; i < run/2; i++)
+            {
+                int left = i * 2 + 1, right = i * 2 + 2;
+                if ((left < run) and (arr[i] < arr[left]))
+                {
+                    swap = arr[left], arr[left] = arr[i], arr[i] = swap;
+                }
+                if ((right < run) and (arr[i] < arr[right]))
+                {
+                    swap = arr[right], arr[right] = arr[i], arr[i] = swap;
+                }
+            }
+            cout << "\nMaxheap : ";
+            display_sorted();
+            cout << endl;
+            swap = arr[0];
+            arr[0] = arr[run - 1];
+            arr[run - 1] = swap;
+            cout << "After Swapping : ";
+            display_sorted();
+            run--;
+        }
+
+        cout << "\nHeap Sorted Array : ";
+        display_sorted();
     }
 };
 
 int main()
 {
-    int s;
-    cout << "Enter Size of Min Heap : ";
-    cin >> s; // 5
-    MinHeap obj(s);
-    obj.getUnsortedArray(); // 7 4 3 9 8
+    Heap hp;
+    int choice;
 
-    cout << "Unsorted Array : ";
-    obj.printArray();
-
-    for (int i = s / 2 - 1; i >= 0; i--)
+    while (1)
     {
-        obj.MinHeapify(i);
+        cout << "\n1.Create Heap - " << endl;
+        cout << "2.Insert element in Heap - " << endl;
+        cout << "3.Display Heap - " << endl;
+        cout << "4.Heap Sort - " << endl;
+        cout << "5.Exit - " << endl;
+
+        cout << "\nEnter your Choice : ";
+        cin >> choice;
+
+        if (choice == 1) hp.create();
+        else if(choice == 2) hp.insert();
+        else if (choice == 3) hp.display_unsorted();
+        else if (choice == 4) hp.sort();
+        else if (choice == 5)
+        {
+            cout << "\nProgram Exit" << endl;
+            break;
+        }
+        else
+        {
+            cout << "Enter a valid choice" << endl;
+        }
     }
 
-    cout << "Heap Sorted Array :";
-    obj.heapSort();
+    return 0;
 }

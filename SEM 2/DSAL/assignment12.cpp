@@ -71,7 +71,7 @@ public:
                 break;
             }
         }
-        if (flag){
+        if (!flag){
             fout.open(fname, ios::app);
             s2.roll = roll;
             cout << "Enter the name:- ";
